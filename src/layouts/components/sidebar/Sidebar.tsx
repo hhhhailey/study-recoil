@@ -5,17 +5,26 @@ import styled from "styled-components";
 
 const Sidebar: React.FC<any> = () => {
   const url = window.location.pathname;
+  console.log(url, "url");
 
   return (
     <StyledWrap>
       <h2>Pinea's Recoil Study</h2>
       <ul className="menu-parent">
         {routes.map(({ children, label, route }, i) => (
-          <li key={i} className={url === route ? "active" : undefined}>
+          <li
+            key={i}
+            className={url === `/study-recoil${route}` ? "active" : undefined}
+          >
             <Link to={route}>{label}</Link>
             <ul className="menu-child">
               {children?.map(({ label, route }, i) => (
-                <li key={i} className={url === route ? "active" : undefined}>
+                <li
+                  key={i}
+                  className={
+                    url === `/study-recoil${route}` ? "active" : undefined
+                  }
+                >
                   <Link to={route}>{label}</Link>
                 </li>
               ))}

@@ -17,6 +17,7 @@ const StyledArticle = styled.div`
       border: 0.1rem solid #dddedf;
       border-radius: 12px;
       padding: 4px 8px;
+      margin: 0 4px;
     }
   }
 `;
