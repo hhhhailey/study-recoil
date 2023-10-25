@@ -14,7 +14,11 @@ const Sidebar: React.FC<any> = () => {
         {routes.map(({ children, label, route }, i) => (
           <li
             key={i}
-            className={url === `/study-recoil${route}` ? "active" : undefined}
+            className={
+              url === `/study-recoil${route !== "/" ? route : ""}`
+                ? "active"
+                : undefined
+            }
           >
             <Link to={route}>{label}</Link>
             <ul className="menu-child">
