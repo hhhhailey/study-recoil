@@ -1,6 +1,7 @@
 import React from "react";
 import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
 import _ from "lodash";
+import { CopyBlock, dracula } from "react-code-blocks";
 
 const textState = atom({
   key: "textState",
@@ -33,6 +34,7 @@ function TextingPage() {
       }, 1),
     [text]
   );
+  //@ts-ignore
 
   return (
     <div>
@@ -41,6 +43,17 @@ function TextingPage() {
       Echo: {text}
       <br />
       Count: {count}
+      <hr />
+      <p>
+        컴포넌트가 atom을 읽고 쓰게 하기 위해서는 useRecoilState()를 사용합니다.
+      </p>
+      <CopyBlock
+        language="jsx"
+        text={`v := Vertex{X: 1, Y: 2}`}
+        codeBlock
+        theme={dracula}
+        showLineNumbers={false}
+      />
     </div>
   );
 }

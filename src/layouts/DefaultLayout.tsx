@@ -22,7 +22,9 @@ const StyledWrap = styled.div`
 const StyledContent = styled.div`
   position: absolute;
   top: 0;
-  left: 180px;
+  left: 0;
   z-index: 100;
+  width: 100%;
   padding: 24px;
+  padding-left: calc(180px + 24px);
 `;
