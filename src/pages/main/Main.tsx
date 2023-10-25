@@ -6,7 +6,7 @@ import DefaultLayout from "../../layouts/DefaultLayout";
 const MainPage = () => {
   return (
     <DefaultLayout>
-      <div>hi</div>
+      <div>home</div>
     </DefaultLayout>
   );
 };

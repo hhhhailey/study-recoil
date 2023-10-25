@@ -8,7 +8,7 @@ const Sidebar: React.FC<any> = () => {
 
   return (
     <StyledWrap>
-      <h2>Pinea's Study Site</h2>
+      <h2>Pinea's Recoil Study</h2>
       <ul className="menu-parent">
         {routes.map(({ children, label, route }, i) => (
           <li key={i} className={url === route ? "active" : undefined}>
@@ -34,6 +34,7 @@ const StyledWrap = styled.div`
   height: 100%;
   padding-top: 24px;
   background-color: #001629;
+  z-index: 1000;
 
   h2 {
     color: white;
