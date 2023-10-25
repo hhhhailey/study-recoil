@@ -1,17 +1,14 @@
 import React from "react";
-import { Link, Router, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { routes } from "../../../constants/routes";
 import styled from "styled-components";
 
 const Sidebar: React.FC<any> = () => {
-  const [_, root, sub1] = window.location.pathname.split("/");
   const url = window.location.pathname;
-  console.log(root, "root");
-  console.log(sub1, "sub");
-  console.log(url, "url");
 
   return (
     <StyledWrap>
+      <h2>Pinea's Study Site</h2>
       <ul className="menu-parent">
         {routes.map(({ children, label, route }, i) => (
           <li key={i} className={url === route ? "active" : undefined}>
@@ -37,6 +34,12 @@ const StyledWrap = styled.div`
   height: 100%;
   padding-top: 24px;
   background-color: #001629;
+
+  h2 {
+    color: white;
+    padding-left: 12px;
+    padding-bottom: 24px;
+  }
 
   ul li {
     color: rgba(255, 255, 255, 0.65);
