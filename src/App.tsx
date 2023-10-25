@@ -9,7 +9,7 @@ import Notfound from "./pages/Notfound";
 function App() {
   return (
     <>
-      <BrowserRouter basename="/">
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           routes
           <Route path="/" element={<MainPage />}></Route>
