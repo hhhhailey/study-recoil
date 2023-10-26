@@ -7,7 +7,6 @@ const ExamplePage = () => {
   const { examplePage } = useParams();
   const route = useNavigate();
   const url = window.location.pathname;
-  console.log(url, "url!");
   const key = examplePage || "texting";
   const Component = examplesPageRoutes[key].component;
 

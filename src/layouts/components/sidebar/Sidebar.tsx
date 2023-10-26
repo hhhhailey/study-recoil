@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 const Sidebar: React.FC<any> = () => {
   const url = window.location.pathname;
-  console.log(url, "url");
 
   return (
     <StyledWrap>

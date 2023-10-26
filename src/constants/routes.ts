@@ -1,4 +1,5 @@
 import TextingPage from "../pages/examples/Texting";
+import TodoList from "../pages/examples/todo-list";
 
 export const routes = [
   {
@@ -25,6 +26,12 @@ export const routes = [
         label: "텍스팅",
         route: "/examples/texting",
       },
+      {
+        id: "2-2",
+        key: "todoList",
+        label: "투두리스트",
+        route: "/examples/todoList",
+      },
     ],
   },
 ];
@@ -32,5 +39,8 @@ export const routes = [
 export const examplesPageRoutes: any = {
   texting: {
     component: TextingPage,
+  },
+  todoList: {
+    component: TodoList,
   },
 };
