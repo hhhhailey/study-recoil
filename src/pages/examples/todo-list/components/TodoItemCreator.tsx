@@ -1,25 +1,30 @@
 import React from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { TodoListStateProps, todoListState } from "..";
+import { TodoListProps, todoListState } from "..";
 
 const TodoItemCreator = () => {
   const [inputValue, setInputValue] = React.useState("");
-  const todoList = useRecoilValue<TodoListStateProps[]>(todoListState);
-  const setTodoList = useSetRecoilState<TodoListStateProps[]>(todoListState);
+  const todoList = useRecoilValue<TodoListProps[]>(todoListState);
+  const setTodoList = useSetRecoilState<TodoListProps[]>(todoListState);
 
   const nextId: number =
     todoList.length > 0 ? todoList[todoList.length - 1].id + 1 : 0;
 
   const addItem = React.useCallback(() => {
-    const newTodo: TodoListStateProps = {
+    if (!inputValue.trim()) {
+      alert("내용입력하셈");
+      return;
+    }
+
+    const newTodo: TodoListProps = {
       id: nextId,
       text: inputValue,
       isCompleted: false,
     };
 
-    setTodoList([...todoList, newTodo]);
+    setTodoList((oldTodoList) => [...oldTodoList, newTodo]);
     setInputValue("");
-  }, []);
+  }, [inputValue, nextId, setTodoList]);
 
   const onChange = ({
     target: { value },
@@ -27,12 +32,22 @@ const TodoItemCreator = () => {
     setInputValue(value);
   };
 
+  const onKeyDown = React.useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === "Enter") {
+        addItem();
+      }
+    },
+    [addItem]
+  );
+
   return (
     <div>
       <input
         type="text"
         value={inputValue}
         onChange={onChange}
+        onKeyDown={onKeyDown}
         placeholder="TODO 입력하기"
       />
       <button onClick={addItem}>Add</button>

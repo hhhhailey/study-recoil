@@ -3,3 +3,12 @@ let id = 0;
 export function getId() {
   return id++;
 }
+
+// 특정 배열 원소 값 바꾸기
+export const replaceItemAtIndex = (
+  arr: string[],
+  index: number,
+  newValue: string
+) => {
+  return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
+};
