@@ -2,11 +2,11 @@ import React from "react";
 import { FaEdit, FaTrash, FaCheckCircle } from "react-icons/fa";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { todoListState } from "..";
 import {
   removeItemAtIndex,
   replaceItemAtIndex,
 } from "../../../../utils/common";
+import { todoListState } from "../../../../mock/todo-list";
 
 const TodoItem: React.FC<any> = ({ item }) => {
   const inputRef = React.useRef<any>(null);
@@ -47,7 +47,11 @@ const TodoItem: React.FC<any> = ({ item }) => {
 
   return (
     <StyledWrap>
-      <input type="checkbox" onChange={toggleItemCompletion} />
+      <input
+        type="checkbox"
+        checked={item.isCompleted}
+        onChange={toggleItemCompletion}
+      />
       <StyledInput readOnly={!!isReadOnly}>
         <input
           type="text"

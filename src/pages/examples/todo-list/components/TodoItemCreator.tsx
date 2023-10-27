@@ -1,6 +1,6 @@
 import React from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { TodoListProps, todoListState } from "..";
+import { TodoListProps, todoListState } from "../../../../mock/todo-list";
 
 const TodoItemCreator = () => {
   const [inputValue, setInputValue] = React.useState("");
