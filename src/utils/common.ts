@@ -6,7 +6,7 @@ export function getId() {
 
 // 특정 배열 원소 값 바꾸기
 export const replaceItemAtIndex = (
-  arr: string[],
+  arr: any[],
   index: number,
   newValue: string
 ) => {

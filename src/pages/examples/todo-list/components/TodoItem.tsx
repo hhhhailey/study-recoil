@@ -1,9 +1,12 @@
 import React from "react";
 import { FaEdit, FaTrash, FaCheckCircle } from "react-icons/fa";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { todoListState } from "..";
-import { removeItemAtIndex } from "../../../../utils/common";
+import {
+  removeItemAtIndex,
+  replaceItemAtIndex,
+} from "../../../../utils/common";
 
 const TodoItem: React.FC<any> = ({ item }) => {
   const inputRef = React.useRef<any>(null);
@@ -20,22 +23,23 @@ const TodoItem: React.FC<any> = ({ item }) => {
     (e: React.MouseEvent<SVGElement, MouseEvent>) => {
       setIsReadOnly(false);
       inputRef?.current.focus();
-      const target = document.getElementsByClassName("todo-text")[0];
-
-      // const newList = replaceItemAtIndex(todoList, index)
-      // const target =
-      //   e.currentTarget.parentElement?.getElementsByClassName("todo-text")[0]
-      //     .innerHTML;
-
-      // console.log(target, "target");
     },
     []
   );
 
-  const deleteItem = React.useCallback(() => {
+  const deleteItem = () => {
     const newList = removeItemAtIndex(todoList, index);
     setTodoList(newList);
-  }, []);
+  };
+
+  const toggleItemCompletion = () => {
+    const newList = replaceItemAtIndex(todoList, index, {
+      ...item,
+      isCompleted: !item.isCompleted,
+    });
+
+    setTodoList(newList);
+  };
 
   React.useLayoutEffect(() => {
     if (item.text) setInputValue(item.text);
@@ -43,6 +47,7 @@ const TodoItem: React.FC<any> = ({ item }) => {
 
   return (
     <StyledWrap>
+      <input type="checkbox" onChange={toggleItemCompletion} />
       <StyledInput readOnly={!!isReadOnly}>
         <input
           type="text"
