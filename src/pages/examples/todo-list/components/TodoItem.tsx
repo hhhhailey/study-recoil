@@ -3,6 +3,7 @@ import { FaEdit, FaTrash, FaCheckCircle } from "react-icons/fa";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { todoListState } from "..";
+import { removeItemAtIndex } from "../../../../utils/common";
 
 const TodoItem: React.FC<any> = ({ item }) => {
   const inputRef = React.useRef<any>(null);
@@ -31,6 +32,11 @@ const TodoItem: React.FC<any> = ({ item }) => {
     []
   );
 
+  const deleteItem = React.useCallback(() => {
+    const newList = removeItemAtIndex(todoList, index);
+    setTodoList(newList);
+  }, []);
+
   React.useLayoutEffect(() => {
     if (item.text) setInputValue(item.text);
   }, [item, inputValue]);
@@ -52,7 +58,7 @@ const TodoItem: React.FC<any> = ({ item }) => {
       ) : (
         <FaCheckCircle onClick={() => setIsReadOnly(true)} />
       )}
-      <FaTrash />
+      <FaTrash onClick={deleteItem} />
     </StyledWrap>
   );
 };
@@ -63,6 +69,10 @@ const StyledWrap = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
+
+  svg {
+    cursor: pointer;
+  }
 `;
 
 const StyledInput = styled.div<{ readOnly?: boolean }>`
