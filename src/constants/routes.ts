@@ -22,9 +22,9 @@ export const routes = [
     children: [
       {
         id: "2-1",
-        key: "texting",
-        label: "텍스팅",
-        route: "/examples/texting",
+        key: "count",
+        label: "카운트",
+        route: "/examples/count",
       },
       {
         id: "2-2",
@@ -37,7 +37,7 @@ export const routes = [
 ];
 
 export const examplesPageRoutes: any = {
-  texting: {
+  count: {
     component: TextingPage,
   },
   todoList: {

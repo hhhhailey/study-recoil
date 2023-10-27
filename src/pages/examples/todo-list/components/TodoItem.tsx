@@ -1,23 +1,57 @@
 import React from "react";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaTrash, FaCheckCircle } from "react-icons/fa";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { todoListState } from "..";
 
 const TodoItem: React.FC<any> = ({ item }) => {
+  const inputRef = React.useRef<any>(null);
   const [todoList, setTodoList] = useRecoilState(todoListState);
+  const [inputValue, setInputValue] = React.useState("");
+  const [isReadOnly, setIsReadOnly] = React.useState(true);
+  const isEditMode = React.useMemo(
+    () => (isReadOnly ? false : true),
+    [isReadOnly]
+  );
   const index = todoList.findIndex((listItem) => listItem === item);
 
   const editItem = React.useCallback(
     (e: React.MouseEvent<SVGElement, MouseEvent>) => {
+      setIsReadOnly(false);
+      inputRef?.current.focus();
+      const target = document.getElementsByClassName("todo-text")[0];
+
       // const newList = replaceItemAtIndex(todoList, index)
+      // const target =
+      //   e.currentTarget.parentElement?.getElementsByClassName("todo-text")[0]
+      //     .innerHTML;
+
+      // console.log(target, "target");
     },
     []
   );
+
+  React.useLayoutEffect(() => {
+    if (item.text) setInputValue(item.text);
+  }, [item, inputValue]);
+
   return (
     <StyledWrap>
-      <div className="todo-text">{item.text}</div>
-      <FaEdit onClick={editItem} />
+      <StyledInput readOnly={!!isReadOnly}>
+        <input
+          type="text"
+          readOnly={!!isReadOnly}
+          ref={inputRef}
+          className="todo-text"
+          onChange={(e) => setInputValue(e.target.value)}
+          defaultValue={inputValue}
+        />
+      </StyledInput>
+      {!isEditMode ? (
+        <FaEdit onClick={editItem} />
+      ) : (
+        <FaCheckCircle onClick={() => setIsReadOnly(true)} />
+      )}
       <FaTrash />
     </StyledWrap>
   );
@@ -29,4 +63,23 @@ const StyledWrap = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
+`;
+
+const StyledInput = styled.div<{ readOnly?: boolean }>`
+  height: 35px;
+  border-bottom: 2px solid transparent;
+
+  ${(p) =>
+    !p.readOnly &&
+    `
+      border-bottom: 2px solid var(--navy);
+    `}
+
+  input {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    background: transparent;
+  }
 `;
