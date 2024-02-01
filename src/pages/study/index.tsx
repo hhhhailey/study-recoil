@@ -2,7 +2,7 @@ import React from "react";
 import DefaultLayout from "../../layouts/DefaultLayout";
 
 const StudyPage = () => {
-  return <DefaultLayout>StudyP111111age</DefaultLayout>;
+  return <DefaultLayout>Study Recoil</DefaultLayout>;
 };
 
 export default StudyPage;
